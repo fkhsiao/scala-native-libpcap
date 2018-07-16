@@ -1,8 +1,7 @@
-// seems I can't use package directories with scala native just yet
-package com.scalawilliam.scalanative
-
 import scala.scalanative.native
 import scala.scalanative.native._
+import scala.scalanative.native.{CString, CUnsignedInt, Ptr, Zone}
+
 
 /**
   * This example app reads online and offline via libpcap.
@@ -68,13 +67,6 @@ object PcapExample {
     println("...]")
   }
 
-  def main(args: Array[String]): Unit = {
-    if (!args.isEmpty)
-      Zone { implicit zone => run(args) }
-    else
-      println("Incorrect usage.")
-  }
-
   def run(args: Array[String])(implicit zone: Zone): Unit = {
     val cooked = args.contains("cooked")
     val live = args.contains("live")
@@ -116,5 +108,12 @@ object PcapExample {
     }
 
     pcap.pcap_close(pcapHandle)
+  }
+
+  def main(args: Array[String]): Unit = {
+    if (!args.isEmpty)
+      Zone { implicit zone => run(args) }
+    else
+      println("Incorrect usage.")
   }
 }

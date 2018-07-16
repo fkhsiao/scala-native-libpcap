@@ -1,4 +1,3 @@
-package com.scalawilliam.scalanative
 
 import scala.scalanative.native
 import scala.scalanative.native.{CInt, CString}
